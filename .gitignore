@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Pywikibot
+user-config.py
+user-password.py
+throttle.ctrl
+apicache*/
+logs/
