@@ -1,0 +1,5 @@
+pandas
+xlrd          # lecture des fichiers .xls
+openpyxl      # lecture des fichiers .xlsx
+requests
+pywikibot     # uniquement pour effectif_enseignement_supp

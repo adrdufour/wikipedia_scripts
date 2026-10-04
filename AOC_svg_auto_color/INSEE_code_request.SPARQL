@@ -1,3 +1,11 @@
+# Retrouve le code INSEE (P374) de communes à partir du titre de leur article
+# sur Wikipédia en français, par exemple pour colorier les communes d'une
+# aire d'appellation (AOC) sur une carte SVG.
+#
+# À exécuter sur https://query.wikidata.org/ après avoir remplacé la liste
+# de VALUES par les communes voulues (titres exacts des articles, suffixés
+# de @fr). Une commune homonyme doit être écrite avec son homonymie, comme
+# dans le titre de l'article, ex. "Villeneuve (Aveyron)"@fr.
 SELECT ?item ?cityLabel ?INSEEmunicipalitycode
 WHERE {
   VALUES ?cityLabel { "Ambeyrac"@fr
@@ -13,10 +21,11 @@ WHERE {
                       "Saujac"@fr
                       "Villeneuve"@fr
                     }
-  #?item wdt:P31 wd:Q484170. # Ce doit être une commune
+  # Décommenter pour ne garder que les éléments de nature « commune française ».
+  #?item wdt:P31 wd:Q484170.
   ?sitelink schema:about ?item;
     schema:isPartOf <https://fr.wikipedia.org/>;
     schema:name ?cityLabel.
-  OPTIONAL{?item wdt:P374 ?INSEEmunicipalitycode .}
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } # le label viendra de préférence dans votre langue, et autrement en anglais
+  OPTIONAL { ?item wdt:P374 ?INSEEmunicipalitycode . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
